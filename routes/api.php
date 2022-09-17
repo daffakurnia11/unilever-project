@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\ApiFormatter;
 use App\Http\Controllers\APIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/{sensor}', [APIController::class, 'show']);
 Route::get('/{sensor}/setpoint', [APIController::class, 'setpoint']);
+
+Route::post('{sensor}', [APIController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
