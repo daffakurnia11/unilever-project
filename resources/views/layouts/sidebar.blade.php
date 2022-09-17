@@ -24,20 +24,20 @@
     <li class="menu-label">Panel Monitoring</li>
     @foreach ($sidebars as $menu)
       @if ($menu->plant_type == 'Panel')
-      <li class="{{ Request::is(`/$menu->plant_name**`) ?? 'mm-active' }}">
+      <li class="{{ Request::is(`$menu->plant_name**`) ?? 'mm-active' }}">
         <a class="has-arrow" href="javascript:;" aria-expanded="false">
           <div class="parent-icon">
             <i class="bi bi-circle"></i>
           </div>
           <div class="menu-title">{{ $menu->plant_name }}</div>
         </a>
-        <ul class="mm-collapse {{ Request::is(`/$menu->plant_name**`) ?? 'mm-show' }}" style="">
-          <li class="{{ Request::is(`/$menu->plant_name/monitoring`) ?? 'mm-active' }}"> 
+        <ul class="mm-collapse {{ Request::is(`$menu->plant_name**`) ?? 'mm-show' }}" style="">
+          <li class="{{ Request::is(`$menu->plant_name/monitoring`) ?? 'mm-active' }}"> 
             <a href="/{{ $menu->plant_name }}/monitoring">
               <i class="bi bi-arrow-right-short"></i> Monitoring
             </a>
           </li>
-          <li class="{{ Request::is(`/$menu->plant_name/setpoint`) ?? 'mm-active' }}"> 
+          <li class="{{ Request::is(`$menu->plant_name/setpoint`) ?? 'mm-active' }}"> 
             <a href="/{{ $menu->plant_name }}/setpoint">
               <i class="bi bi-arrow-right-short"></i> Set Point
             </a>
@@ -49,20 +49,20 @@
     <li class="menu-label">Motor Monitoring</li>
     @foreach ($sidebars as $menu)
       @if ($menu->plant_type == 'Motor')
-      <li class="{{ Request::is(`/$menu->plant_name**`) ?? 'mm-active' }}">
+      <li class="{{ Request::is(`$menu->plant_name**`) ?? 'mm-active' }}">
         <a class="has-arrow" href="javascript:;" aria-expanded="false">
           <div class="parent-icon">
             <i class="bi bi-circle"></i>
           </div>
           <div class="menu-title">{{ $menu->plant_name }}</div>
         </a>
-        <ul class="mm-collapse {{ Request::is(`/$menu->plant_name**`) ?? 'mm-show' }}" style="">
-          <li class="{{ Request::is(`/$menu->plant_name/monitoring`) ?? 'mm-active' }}"> 
+        <ul class="mm-collapse {{ Request::is(`$menu->plant_name**`) ?? 'mm-show' }}" style="">
+          <li class="{{ Request::is(`$menu->plant_name/monitoring`) ?? 'mm-active' }}"> 
             <a href="/{{ $menu->plant_name }}/monitoring">
               <i class="bi bi-arrow-right-short"></i> Monitoring
             </a>
           </li>
-          <li class="{{ Request::is(`/$menu->plant_name/setpoint`) ?? 'mm-active' }}"> 
+          <li class="{{ Request::is(`$menu->plant_name/setpoint`) ?? 'mm-active' }}"> 
             <a href="/{{ $menu->plant_name }}/setpoint">
               <i class="bi bi-arrow-right-short"></i> Set Point
             </a>

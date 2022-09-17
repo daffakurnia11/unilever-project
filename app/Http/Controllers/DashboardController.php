@@ -13,4 +13,19 @@ class DashboardController extends Controller
             'sidebars'  => Sensor::all()
         ]);
     }
+
+    public function monitoring(Sensor $sensor)
+    {
+        if ($sensor->plant_type == 'Panel') {
+            return view('monitoring.panel', [
+                'sidebars'  => Sensor::all(),
+                'sensor'    => $sensor
+            ]);
+        } elseif ($sensor->plant_type == 'Motor') {
+            return view('monitoring.motor', [
+                'sidebars'  => Sensor::all(),
+                'sensor'    => $sensor
+            ]);
+        }
+    }
 }
