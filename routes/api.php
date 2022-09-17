@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/{sensor}', [APIController::class, 'show']);
+Route::get('/{sensor}/setpoint', [APIController::class, 'setpoint']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
