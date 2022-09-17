@@ -1,6 +1,5 @@
 <?php
 
-use App\Helpers\ApiFormatter;
 use App\Http\Controllers\APIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
