@@ -16,9 +16,12 @@ class CreateSensorSetPointsTable extends Migration
         Schema::create('sensor_set_points', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sensor_id');
-            $table->string('set_point1')->nullable();
-            $table->string('set_point2')->nullable();
-            $table->string('set_point3')->nullable();
+            $table->string('warning1')->nullable();
+            $table->string('danger1')->nullable();
+            $table->string('warning2')->nullable();
+            $table->string('danger2')->nullable();
+            $table->string('warning3')->nullable();
+            $table->string('danger3')->nullable();
             $table->timestamps();
         });
     }
