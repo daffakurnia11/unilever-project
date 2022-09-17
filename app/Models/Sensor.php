@@ -13,6 +13,11 @@ class Sensor extends Model
         'plant_name', 'plant_type', 'sensor_type'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'plant_name';
+    }
+
     public function sensor_motor()
     {
         return $this->hasMany(SensorMotor::class);
