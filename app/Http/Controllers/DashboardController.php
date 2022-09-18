@@ -31,6 +31,17 @@ class DashboardController extends Controller
         return back()->with('message', 'Login Failed');
     }
 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/auth')->with('message', 'Logout Success');
+    }
+
     public function index()
     {
         $url = env('APP_ENV') == 'local' ? env('API_DEVELOP') : env('API_PRODUCTION');

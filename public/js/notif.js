@@ -10,4 +10,12 @@ if (flashdata) {
             confirmButtonColor: "#c6384d",
         });
     }
+    // Logout Success
+    if (flashdata == "Logout Success") {
+        Swal.fire({
+            icon: "success",
+            title: "Logout success",
+            confirmButtonColor: "#c6384d",
+        });
+    }
 }

@@ -8,7 +8,13 @@
         <div class="top-navbar d-none d-xl-block">
           <ul class="navbar-nav align-items-center">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Dashboard</a>
+              <a class="nav-link" href="/">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <form action="/logout" method="POST">
+                @csrf
+                <button type="submit" class="nav-link border-0 bg-transparent">Logout</button>
+              </form>
             </li>
           </ul>
         </div>

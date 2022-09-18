@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/auth', [DashboardController::class, 'auth']);
 Route::post('/auth', [DashboardController::class, 'authentication']);
+Route::post('/logout', [DashboardController::class, 'logout']);
 Route::get('/', [DashboardController::class, 'index']);
 
 Route::get('/{sensor}/monitoring', [DashboardController::class, 'monitoring']);
