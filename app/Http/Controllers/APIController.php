@@ -74,6 +74,24 @@ class APIController extends Controller
         return ApiFormatter::createApi(201, 'Data stored', $count, $validated);
     }
 
+    public function latest(Sensor $sensor)
+    {
+        if ($sensor->plant_type == 'Panel') {
+            $data = Sensor::where("plant_name", $sensor->plant_name)->with('sensor_panel', function ($data) {
+                $data->latest()->first();
+            })->with('set_point')->get();
+        } elseif ($sensor->plant_type == 'Motor') {
+            $data = Sensor::where("plant_name", $sensor->plant_name)->with('sensor_motor', function ($data) {
+                $data->latest()->first();
+            })->with('set_point')->get();
+        }
+
+        if (!$data) {
+            return ApiFormatter::createApi(400, 'Failed fetching data');
+        }
+        return ApiFormatter::createApi(200, 'Success fetching data', 1, $data);
+    }
+
     public function data(Sensor $sensor, Request $request)
     {
         // Filter by Panel Sensor
