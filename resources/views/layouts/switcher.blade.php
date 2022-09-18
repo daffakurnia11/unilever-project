@@ -12,7 +12,7 @@
       <h6 class="mb-0">Theme Variation</h6>
       <hr>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="LightTheme" value="option1" checked>
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="LightTheme" value="option1">
         <label class="form-check-label" for="LightTheme">Light</label>
       </div>
       <div class="form-check form-check-inline">
@@ -20,7 +20,7 @@
         <label class="form-check-label" for="DarkTheme">Dark</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="SemiDarkTheme" value="option3">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="SemiDarkTheme" value="option3" checked>
         <label class="form-check-label" for="SemiDarkTheme">Semi Dark</label>
       </div>
       <hr>
