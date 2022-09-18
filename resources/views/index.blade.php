@@ -147,6 +147,53 @@
         </div>
       </div>
     </div>
+    <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-xl-3">
+      <div class="col">
+        <div class="card radius-10">
+          <div class="card-body text-center">
+            <div class="widget-icon mx-auto mb-1 bg-light-purple text-purple">
+              <i class="bi bi-arrow-bar-right"></i>
+            </div>
+            <p class="mb-0">X-axis</p>
+            <h3 class="mt-1 mb-0"><span class="{{ $menu->plant_name }}-xAxis"></span> deg</h3>
+            <small id="xProgress" class="text-success">
+              <i class="bi bi-caret-up-fill"></i>
+              <span class="{{ $menu->plant_name }}-timestamp">-</span>
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card radius-10">
+          <div class="card-body text-center">
+            <div class="widget-icon mx-auto mb-1 bg-light-orange text-orange">
+              <i class="bi bi-arrow-bar-up"></i>
+            </div>
+            <p class="mb-0">Y-axis</p>
+            <h3 class="mt-1 mb-0"><span class="{{ $menu->plant_name }}-yAxis"></span> deg</h3>
+            <small id="yProgress" class="text-success">
+              <i class="bi bi-caret-up-fill"></i>
+              <span class="{{ $menu->plant_name }}-timestamp">-</span>
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card radius-10">
+          <div class="card-body text-center">
+            <div class="widget-icon mx-auto mb-1 bg-light-success text-success">
+              <i class="bi bi-arrow-bar-down"></i>
+            </div>
+            <p class="mb-0">Z-axis</p>
+            <h3 class="mt-1 mb-0"><span class="{{ $menu->plant_name }}-zAxis"></span> deg</h3>
+            <small id="PowerProgress" class="text-success">
+              <i class="bi bi-caret-up-fill"></i>
+              <span class="{{ $menu->plant_name }}-timestamp">-</span>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
         
     @endif
   @endforeach
@@ -235,6 +282,9 @@
               $(`.${data.plant_name}-temperature`).html(temperature)
               $(`.${data.plant_name}-status1`).html(status1)
               $(`.${data.plant_name}-status2`).html(status2)
+              $(`.${data.plant_name}-xAxis`).html(data.sensor_motor[0].x_axis)
+              $(`.${data.plant_name}-yAxis`).html(data.sensor_motor[0].y_axis)
+              $(`.${data.plant_name}-zAxis`).html(data.sensor_motor[0].z_axis)
               $(`.${data.plant_name}-timestamp`).html(getTimestamp(data.sensor_motor[0].created_at))
             }
           });
