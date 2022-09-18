@@ -42,6 +42,13 @@
 //   const url = 'http://128.199.87.189';
   const url = 'http://192.168.55.102/unilever-project/public';
   const sensorName = '{{ $sensor->plant_name }}';
+  let params = (new URL(document.location)).searchParams;
+  let filter = params.get("filter");
+  let by = params.get("by");
+  let sensorQuery = `data`;
+  if (filter && by) {
+    sensorQuery = `data?filter=${filter}&by=${by}`;
+  } 
 
   // Generating random data
   function getRndInteger(min, max) {
@@ -116,7 +123,7 @@
 
       $.ajax({
         type: "GET",
-        url: url + `/api/${sensorName}/data`,
+        url: url + `/api/${sensorName}/${sensorQuery}`,
         dataType: 'JSON',
         success: function (resp) {
           resp.data.sensor_panel.forEach(data => {
@@ -157,7 +164,7 @@
 
       $.ajax({
         type: "GET",
-        url: url + `/api/${sensorName}/data`,
+        url: url + `/api/${sensorName}/${sensorQuery}`,
         dataType: 'JSON',
         success: function (resp) {
           resp.data.sensor_panel.forEach(data => {
