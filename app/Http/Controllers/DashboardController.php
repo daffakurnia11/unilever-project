@@ -28,4 +28,19 @@ class DashboardController extends Controller
             ]);
         }
     }
+
+    public function setpoint(Sensor $sensor)
+    {
+        if ($sensor->plant_type == 'Panel') {
+            return view('setpoint.panel', [
+                'sidebars'  => Sensor::all(),
+                'sensor'    => $sensor
+            ]);
+        } elseif ($sensor->plant_type == 'Motor') {
+            return view('setpoint.motor', [
+                'sidebars'  => Sensor::all(),
+                'sensor'    => $sensor
+            ]);
+        }
+    }
 }
