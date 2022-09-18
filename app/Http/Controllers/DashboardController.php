@@ -4,9 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Sensor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+    public function auth()
+    {
+        $url = env('APP_ENV') == 'local' ? env('API_DEVELOP') : env('API_PRODUCTION');
+        return view('auth', [
+            'sidebars'  => Sensor::all(),
+            'api_url'   => $url
+        ]);
+    }
+
+    public function authentication(Request $request)
+    {
+        $credentials = $request->validate([
+            'username'  => 'required',
+            'password'  => 'required'
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            return redirect('/');
+        }
+
+        return back()->with('message', 'Login Failed');
+    }
+
     public function index()
     {
         $url = env('APP_ENV') == 'local' ? env('API_DEVELOP') : env('API_PRODUCTION');

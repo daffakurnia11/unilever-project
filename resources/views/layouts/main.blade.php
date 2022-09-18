@@ -35,16 +35,24 @@
       <div id="flash-data" data-flashdata="{{ session('message') }}"></div>
     @endif
 
-    @include('layouts.header')
+    @if (auth()->user()) 
+      @include('layouts.header')
+      
+      @include('layouts.sidebar')
 
-    @include('layouts.sidebar')
+      @include('layouts.switcher')
 
-    <!--start content-->
-    <main class="page-content">
-          
+      <!--start content-->
+      <main class="page-content">
+            
+        @yield('content')
+        
+      </main>
+    @else 
+
       @yield('content')
-          
-    </main>
+
+    @endif
     <!--end page main-->
 
     <!--start overlay-->
@@ -54,8 +62,6 @@
     <!--Start Back To Top Button-->
     <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
     <!--End Back To Top Button-->
-
-    @include('layouts.switcher')
   </div>
   <!--end wrapper-->
 
@@ -74,6 +80,7 @@
   <script src="/vendor/sweetalert2/dist/sweetalert2.all.js"></script>
   <!--app-->
   <script src="/js/app.js"></script>
+  <script src="/js/notif.js"></script>
 
   @yield('javascript')
 
