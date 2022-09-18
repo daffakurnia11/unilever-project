@@ -6,6 +6,7 @@ use App\Helpers\ApiFormatter;
 use App\Models\Sensor;
 use App\Models\SensorMotor;
 use App\Models\SensorPanel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -68,14 +69,46 @@ class APIController extends Controller
         return ApiFormatter::createApi(201, 'Data stored', $count, $validated);
     }
 
-    public function data(Sensor $sensor)
+    public function data(Sensor $sensor, Request $request)
     {
+        // Filter by Panel Sensor
         if ($sensor->plant_type == 'Panel') {
-            $data_sensor = SensorPanel::where('sensor_id', $sensor->id)->get();
-            $sensor['sensor_panel'] = $data_sensor;
+            if (isset($request->filter) && isset($request->by)) {
+                // Filter by minutes
+                if ($request->by == 'minutes') {
+                    $latest = SensorPanel::latest()->first()['created_at'];
+                    $data_sensor = SensorPanel::where('sensor_id', $sensor->id)->where('created_at', '>=', Carbon::create($latest)->subMinutes($request->filter))->get();
+                    $sensor['sensor_panel'] = $data_sensor;
+                    // Filter by hours
+                } elseif ($request->by == 'hours') {
+                    $latest = SensorPanel::latest()->first()['created_at'];
+                    $data_sensor = SensorPanel::where('sensor_id', $sensor->id)->where('created_at', '>=', Carbon::create($latest)->subHours($request->filter))->get();
+                    $sensor['sensor_panel'] = $data_sensor;
+                }
+                // All datas
+            } else {
+                $data_sensor = SensorPanel::where('sensor_id', $sensor->id)->get();
+                $sensor['sensor_panel'] = $data_sensor;
+            }
+            // Filter by Motor Sensor
         } elseif ($sensor->plant_type == 'Motor') {
-            $data_sensor = SensorMotor::where('sensor_id', $sensor->id)->get();
-            $sensor['sensor_motor'] = $data_sensor;
+            if (isset($request->filter) && isset($request->by)) {
+                // Filter by minutes
+                if ($request->by == 'minutes') {
+                    $latest = SensorMotor::latest()->first()['created_at'];
+                    $data_sensor = SensorMotor::where('sensor_id', $sensor->id)->where('created_at', '>=', Carbon::create($latest)->subMinutes($request->filter))->get();
+                    $sensor['sensor_panel'] = $data_sensor;
+                    // Filter by hours
+                } elseif ($request->by == 'hours') {
+                    $latest = SensorMotor::latest()->first()['created_at'];
+                    $data_sensor = SensorMotor::where('sensor_id', $sensor->id)->where('created_at', '>=', Carbon::create($latest)->subHours($request->filter))->get();
+                    $sensor['sensor_panel'] = $data_sensor;
+                }
+                // All datas
+            } else {
+                $data_sensor = SensorMotor::where('sensor_id', $sensor->id)->get();
+                $sensor['sensor_motor'] = $data_sensor;
+            }
         }
 
         $data = $sensor;
