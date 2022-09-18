@@ -33,7 +33,7 @@
         </a>
         <ul class="mm-collapse {{ Request::is(`$menu->plant_name**`) ?? 'mm-show' }}" style="">
           <li class="{{ Request::is(`$menu->plant_name/monitoring`) ?? 'mm-active' }}"> 
-            <a href="/{{ $menu->plant_name }}/monitoring">
+            <a href="/{{ $menu->plant_name }}/monitoring?filter=10&by=minutes">
               <i class="bi bi-arrow-right-short"></i> Monitoring
             </a>
           </li>
@@ -58,7 +58,7 @@
         </a>
         <ul class="mm-collapse {{ Request::is(`$menu->plant_name**`) ?? 'mm-show' }}" style="">
           <li class="{{ Request::is(`$menu->plant_name/monitoring`) ?? 'mm-active' }}"> 
-            <a href="/{{ $menu->plant_name }}/monitoring">
+            <a href="/{{ $menu->plant_name }}/monitoring?filter=10&by=minutes">
               <i class="bi bi-arrow-right-short"></i> Monitoring
             </a>
           </li>
