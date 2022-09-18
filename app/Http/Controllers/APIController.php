@@ -65,7 +65,11 @@ class APIController extends Controller
         $validated = $validator->validated();
         $validated['sensor_id'] = $sensor->id;
 
-        $count = SensorPanel::create($validated)->count();
+        if ($sensor->plant_type == 'Panel') {
+            $count = SensorPanel::create($validated)->count();
+        } elseif ($sensor->plant_type == 'Motor') {
+            $count = SensorMotor::create($validated)->count();
+        }
         return ApiFormatter::createApi(201, 'Data stored', $count, $validated);
     }
 
@@ -97,12 +101,12 @@ class APIController extends Controller
                 if ($request->by == 'minutes') {
                     $latest = SensorMotor::latest()->first()['created_at'];
                     $data_sensor = SensorMotor::where('sensor_id', $sensor->id)->where('created_at', '>=', Carbon::create($latest)->subMinutes($request->filter))->get();
-                    $sensor['sensor_panel'] = $data_sensor;
+                    $sensor['sensor_motor'] = $data_sensor;
                     // Filter by hours
                 } elseif ($request->by == 'hours') {
                     $latest = SensorMotor::latest()->first()['created_at'];
                     $data_sensor = SensorMotor::where('sensor_id', $sensor->id)->where('created_at', '>=', Carbon::create($latest)->subHours($request->filter))->get();
-                    $sensor['sensor_panel'] = $data_sensor;
+                    $sensor['sensor_motor'] = $data_sensor;
                 }
                 // All datas
             } else {

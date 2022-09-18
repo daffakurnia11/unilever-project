@@ -88,11 +88,40 @@
 
 @section('javascript')
 <script>
-  const url = 'http://128.199.87.189';
-
+  // const url = 'http://128.199.87.189';
+  const url = 'http://192.168.55.102/unilever-project/public';
+  const sensorName = '{{ $sensor->plant_name }}';
   let params = (new URL(document.location)).searchParams;
   let filter = params.get("filter");
-  let unit = params.get("unit");
+  let by = params.get("by");
+  let sensorQuery = `data`;
+  if (filter && by) {
+    sensorQuery = `data?filter=${filter}&by=${by}`;
+  } 
+
+  // Generating random data
+  function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
+  var generateData = function () {
+    $.ajax({
+      type: "POST",
+      url: url + `/api/${sensorName}`,
+      data: {
+        temperature: getRndInteger(20, 30),
+        ambient: getRndInteger(20, 30),
+        x_axis: getRndInteger(0, 10),
+        y_axis: getRndInteger(0, 10),
+        z_axis: getRndInteger(0, 10),
+        volt: getRndInteger(210, 220),
+        ampere: getRndInteger(0, 8),
+        power: getRndInteger(0, 10),
+      },
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }
 
   var chartOption = {
     chart: {
@@ -159,10 +188,10 @@
 
       $.ajax({
         type: "GET",
-        url: url + `/api/Motor1/temperature?filter=${filter}&unit=${unit}`,
+        url: url + `/api/${sensorName}/${sensorQuery}`,
         dataType: 'JSON',
         success: function (resp) {
-          resp.data[0].temperature.forEach(data => {
+          resp.data.sensor_motor.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
             let temperature = {x: time, y: data.temperature};
             dataTemperature.push(temperature);
@@ -191,15 +220,8 @@
               text: "Ambient Monitoring"
             }
           });
-        }
-      });
 
-      $.ajax({
-        type: "GET",
-        url: url + `/api/Motor1/vibration?filter=${filter}&unit=${unit}`,
-        dataType: 'JSON',
-        success: function (resp) {
-          resp.data[0].vibration.forEach(data => {
+          resp.data.sensor_motor.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
             let dataX = {x: time, y: data.x_axis};
             dataVibrationX.push(dataX);
@@ -243,15 +265,8 @@
               text: "Z Axis Vibration"
             }
           });
-        }
-      });
 
-      $.ajax({
-        type: "GET",
-        url: url + `/api/Motor1/current?filter=${filter}&unit=${unit}`,
-        dataType: 'JSON',
-        success: function (resp) {
-          resp.data[0].current.forEach(data => {
+          resp.data.sensor_motor.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
             let volt = {x: time, y: data.volt};
             dataVolt.push(volt);
@@ -288,6 +303,7 @@
     updateChart();
     setInterval(() => {
       updateChart();
+      generateData();
     }, 5000);
   </script>
   @endsection

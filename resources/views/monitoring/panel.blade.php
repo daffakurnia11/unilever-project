@@ -159,14 +159,7 @@
               text: "BMP280 Temperature Sensor"
             }
           })
-        }
-      });
-
-      $.ajax({
-        type: "GET",
-        url: url + `/api/${sensorName}/${sensorQuery}`,
-        dataType: 'JSON',
-        success: function (resp) {
+          
           resp.data.sensor_panel.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
             let dataJson = {x: time, y: data.pressure1};
