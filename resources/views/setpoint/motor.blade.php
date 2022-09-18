@@ -23,7 +23,7 @@
   <h6 class="mb-0 text-uppercase">Motor Set Point</h6>
   <hr>
   <div class="card col-xxl-8">
-    <form action="" method="POST">
+    <form action="http://192.168.55.102/unilever-project/public/api/{{ $sensor->plant_name }}" method="POST">
       @csrf
       <div class="card-body">
         <h6 class="mb-0 text-uppercase">{{ $sensor->plant_name }} Sensors</h6>
@@ -37,12 +37,12 @@
               <div class="card-body">
                 <label for="name" class="form-label">Warning</label>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="warning2">
+                  <input type="text" class="form-control" name="warning2" value="{{ $setpoints->warning2 }}">
                   <span class="input-group-text"><sup>o</sup>C</span>
                 </div>
                 <label for="name" class="form-label">Danger</label>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="danger2">
+                  <input type="text" class="form-control" name="danger2" value="{{ $setpoints->danger2 }}">
                   <span class="input-group-text"><sup>o</sup>C</span>
                 </div>
               </div>
@@ -51,18 +51,18 @@
           <div class="col-sm-6">
             <div class="card">
               <div class="card-header">
-                <h6 class="card-title">Volt and Current Sensor</h6>
+                <h6 class="card-title">Current Sensor</h6>
               </div>
               <div class="card-body">
                 <label for="name" class="form-label">Warning</label>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="warning3">
-                  <span class="input-group-text"><sup>o</sup>C</span>
+                  <input type="text" class="form-control" name="warning3" value="{{ $setpoints->warning3 }}">
+                  <span class="input-group-text">Ampere</span>
                 </div>
                 <label for="name" class="form-label">Danger</label>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="danger3">
-                  <span class="input-group-text"><sup>o</sup>C</span>
+                  <input type="text" class="form-control" name="danger3" value="{{ $setpoints->danger3 }}">
+                  <span class="input-group-text">Ampere</span>
                 </div>
               </div>
             </div>

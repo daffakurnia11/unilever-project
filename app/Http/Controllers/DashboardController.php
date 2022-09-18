@@ -31,15 +31,20 @@ class DashboardController extends Controller
 
     public function setpoint(Sensor $sensor)
     {
+        $request = file_get_contents('http://192.168.55.102/unilever-project/public/api/' . $sensor->plant_name . '/setpoint');
+        $response = json_decode($request);
+
         if ($sensor->plant_type == 'Panel') {
             return view('setpoint.panel', [
                 'sidebars'  => Sensor::all(),
-                'sensor'    => $sensor
+                'sensor'    => $sensor,
+                'setpoints' => $response->data[0]->set_point
             ]);
         } elseif ($sensor->plant_type == 'Motor') {
             return view('setpoint.motor', [
                 'sidebars'  => Sensor::all(),
-                'sensor'    => $sensor
+                'sensor'    => $sensor,
+                'setpoints' => $response->data[0]->set_point
             ]);
         }
     }
