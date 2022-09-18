@@ -28,18 +28,9 @@
   </div>
   <hr>
   <div class="row justify-content-center">
-    <div class="col-xl-6">
-      <div class="card">
-        <div class="card-body">
-          <div id="temperatureChart"></div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-6">
-      <div class="card">
-        <div class="card-body">
-          <div id="ambientChart"></div>
-        </div>
+    <div class="card">
+      <div class="card-body">
+        <div id="temperatureChart"></div>
       </div>
     </div>
   </div>
@@ -212,8 +203,6 @@
 
   var temperatureChart = new ApexCharts(document.getElementById("temperatureChart"), chartOption);
   temperatureChart.render();
-  var ambientChart = new ApexCharts(document.getElementById("ambientChart"), chartOption);
-  ambientChart.render();
 
   var vibrationXChart = new ApexCharts(document.getElementById("vibrationXChart"), chartOption);
   vibrationXChart.render();
@@ -255,21 +244,13 @@
             series: [{
               name: 'Temperature',
               data: dataTemperature
-            }],
-            colors: ["#0d6efd"],
-            title: {
-              text: "Temperature Monitoring"
-            }
-          });
-
-          ambientChart.updateOptions({
-            series: [{
+            },{
               name: 'Ambient',
               data: dataAmbient
             }],
-            colors: ["#dc3545"],
+            colors: ["#0d6efd", '#dc3545'],
             title: {
-              text: "Ambient Monitoring"
+              text: "Temperature Monitoring"
             }
           });
 
