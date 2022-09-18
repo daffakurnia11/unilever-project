@@ -40,7 +40,7 @@
 @section('javascript')
 <script>
 //   const url = 'http://128.199.87.189';
-  const url = 'http://192.168.55.102/unilever-project/public/api';
+  const url = 'http://192.168.55.102/unilever-project/public';
   const sensorName = '{{ $sensor->plant_name }}';
 
   // Generating random data
@@ -50,7 +50,7 @@
   var generateData = function () {
     $.ajax({
       type: "POST",
-      url: url + `/${sensorName}`,
+      url: url + `/api/${sensorName}`,
       data: {
         temperature1: getRndInteger(20, 30),
         temperature2: getRndInteger(20, 30),
@@ -116,24 +116,24 @@
 
       $.ajax({
         type: "GET",
-        url: url + '/api/Panel1/temperature?filter=5&unit=minutes',
+        url: url + `/api/${sensorName}/data`,
         dataType: 'JSON',
         success: function (resp) {
-          resp.data[0].temperature.forEach(data => {
+          resp.data.sensor_panel.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
-            let dataJson = {x: time, y: data.temperature};
+            let dataJson = {x: time, y: data.temperature1};
             dataTemperature1.push(dataJson);
           });
 
-          resp.data[1].temperature.forEach(data => {
+          resp.data.sensor_panel.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
-            let dataJson = {x: time, y: data.temperature};
+            let dataJson = {x: time, y: data.temperature2};
             dataTemperature2.push(dataJson);
           });
 
-          resp.data[2].temperature.forEach(data => {
+          resp.data.sensor_panel.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
-            let dataJson = {x: time, y: data.temperature};
+            let dataJson = {x: time, y: data.temperature3};
             dataTemperature3.push(dataJson);
           });
 
@@ -157,24 +157,24 @@
 
       $.ajax({
         type: "GET",
-        url: url + '/api/Panel1/temperature?filter=5&unit=minutes',
+        url: url + `/api/${sensorName}/data`,
         dataType: 'JSON',
         success: function (resp) {
-          resp.data[0].temperature.forEach(data => {
+          resp.data.sensor_panel.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
-            let dataJson = {x: time, y: data.pressure};
+            let dataJson = {x: time, y: data.pressure1};
             dataPressure1.push(dataJson);
           });
 
-          resp.data[1].temperature.forEach(data => {
+          resp.data.sensor_panel.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
-            let dataJson = {x: time, y: data.pressure};
+            let dataJson = {x: time, y: data.pressure2};
             dataPressure2.push(dataJson);
           });
 
-          resp.data[2].temperature.forEach(data => {
+          resp.data.sensor_panel.forEach(data => {
             let time = moment(data.created_at).format("MMM, DD YYYY - HH:mm:ss");
-            let dataJson = {x: time, y: data.pressure};
+            let dataJson = {x: time, y: data.pressure3};
             dataPressure3.push(dataJson);
           });
 
