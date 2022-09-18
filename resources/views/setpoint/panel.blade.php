@@ -122,12 +122,22 @@
           danger3: danger3,
         },
         success: function(resp) {
+          Swal.fire({
+            title: resp.message,
+            icon: 'success',
+          })
           $('input[name=warning1]').val(resp.data.warning1);
           $('input[name=warning2]').val(resp.data.warning2);
           $('input[name=warning3]').val(resp.data.warning3);
           $('input[name=danger1]').val(resp.data.danger1);
           $('input[name=danger2]').val(resp.data.danger2);
           $('input[name=danger3]').val(resp.data.danger3);
+        },
+        error: function(resp) {
+          Swal.fire({
+            title: resp.status + ' ' + resp.statusText,
+            icon: 'error',
+          })
         }
       })
     })

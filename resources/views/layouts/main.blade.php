@@ -71,6 +71,7 @@
 	<script src="/vendor/datatable/js/dataTables.bootstrap5.min.js"></script>
   <script src="/vendor/chartjs/dist/chart.js"></script>
   <script src="/vendor/apexcharts/dist/apexcharts.js"></script>
+  <script src="/vendor/sweetalert2/dist/sweetalert2.all.js"></script>
   <!--app-->
   <script src="/js/app.js"></script>
 
