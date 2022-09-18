@@ -14,17 +14,19 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function monitoring(Sensor $sensor)
+    public function monitoring(Sensor $sensor, Request $request)
     {
         if ($sensor->plant_type == 'Panel') {
             return view('monitoring.panel', [
                 'sidebars'  => Sensor::all(),
-                'sensor'    => $sensor
+                'sensor'    => $sensor,
+                'request'   => $request
             ]);
         } elseif ($sensor->plant_type == 'Motor') {
             return view('monitoring.motor', [
                 'sidebars'  => Sensor::all(),
-                'sensor'    => $sensor
+                'sensor'    => $sensor,
+                'request'   => $request
             ]);
         }
     }

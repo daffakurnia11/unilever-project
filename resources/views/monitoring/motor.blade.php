@@ -20,7 +20,12 @@
   </div>
   <!--end of Header--> 
 
-  <h6 class="mb-0 text-uppercase">MLX Temperature Sensor Monitoring</h6>
+  <div class="d-flex align-items-center justify-content-between">
+    <h6 class="mb-0 text-uppercase">MLX Temperature Sensor Monitoring</h6>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+      Filter
+    </button>
+  </div>
   <hr>
   <div class="row justify-content-center">
     <div class="col-xl-6">
@@ -39,7 +44,12 @@
     </div>
   </div>
 
-  <h6 class="mb-0 text-uppercase">ADXL Vibration Sensor Monitoring</h6>
+  <div class="d-flex align-items-center justify-content-between">
+    <h6 class="mb-0 text-uppercase">ADXL Vibration Sensor Monitoring</h6>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+      Filter
+    </button>
+  </div>
   <hr>
   <div class="row justify-content-center">
     <div class="col-xl-6">
@@ -65,7 +75,12 @@
     </div>
   </div>
 
-  <h6 class="mb-0 text-uppercase">PZEM Volt and Current Sensor Monitoring</h6>
+  <div class="d-flex align-items-center justify-content-between">
+    <h6 class="mb-0 text-uppercase">PZEM Volt and Current Sensor Monitoring</h6>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+      Filter
+    </button>
+  </div>
   <hr>
   <div class="row justify-content-center">
     <div class="col-xl-6">
@@ -80,6 +95,43 @@
         <div class="card-body">
           <div id="currentChart"></div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Modal -->
+  <div class="modal fade" id="filterModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Filter Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/{{ $sensor->plant_name }}/monitoring" method="get">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="mb-3">
+                  <label for="filter" class="form-label">Time interval</label>
+                  <input type="text" class="form-control" id="filter" name="filter" value="{{ $request->filter }}">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="mb-3">
+                  <label for="by" class="form-label">Time unit</label>
+                  <select class="form-select" id="by" name="by">
+                    <option {{ $request->by == 'minutes' ? 'selected' : '' }} value="minutes">Minutes</option>
+                    <option {{ $request->by == 'hours' ? 'selected' : '' }} value="hours">Hours</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Filter</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
