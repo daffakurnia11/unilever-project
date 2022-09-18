@@ -23,7 +23,8 @@
   <h6 class="mb-0 text-uppercase">Motor Set Point</h6>
   <hr>
   <div class="card col-xxl-8">
-    <form action="http://192.168.55.102/unilever-project/public/api/{{ $sensor->plant_name }}" method="POST">
+    <form action="http://192.168.55.102/unilever-project/public/api/{{ $sensor->plant_name }}" method="POST" id="setPointForm">
+      @method('PATCH')
       @csrf
       <div class="card-body">
         <h6 class="mb-0 text-uppercase">{{ $sensor->plant_name }} Sensors</h6>
@@ -75,4 +76,35 @@
     </form>
   </div>
 
+@endsection
+
+@section('javascript')
+  <script>
+    $('#setPointForm').submit((e) => {
+      e.preventDefault();
+      const url = $('#setPointForm').attr('action');
+
+      const warning2 = $('input[name=warning2]').val();
+      const warning3 = $('input[name=warning3]').val();
+      const danger2 = $('input[name=danger2]').val();
+      const danger3 = $('input[name=danger3]').val();
+
+      $.ajax({
+        url: url,
+        type: 'PATCH',
+        data: {
+          warning2: warning2,
+          warning3: warning3,
+          danger2: danger2,
+          danger3: danger3,
+        },
+        success: function(resp) {
+          $('input[name=warning2]').val(resp.data.warning2);
+          $('input[name=warning3]').val(resp.data.warning3);
+          $('input[name=danger2]').val(resp.data.danger2);
+          $('input[name=danger3]').val(resp.data.danger3);
+        }
+      })
+    })
+  </script>
 @endsection
