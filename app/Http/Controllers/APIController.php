@@ -123,4 +123,34 @@ class APIController extends Controller
         }
         return ApiFormatter::createApi(200, 'Success fetching data', $count, $data);
     }
+
+    public function update(Sensor $sensor, Request $request)
+    {
+        if ($sensor->plant_type == 'Panel') {
+            $validator = Validator::make($request->all(), [
+                'warning1'  => 'required',
+                'warning2'  => 'required',
+                'warning3'  => 'required',
+                'danger1'   => 'required',
+                'danger2'   => 'required',
+                'danger3'   => 'required',
+            ]);
+        } elseif ($sensor->plant_type == 'Motor') {
+            $validator = Validator::make($request->all(), [
+                'warning2'  => 'required',
+                'warning3'  => 'required',
+                'danger2'   => 'required',
+                'danger3'   => 'required',
+            ]);
+        }
+
+        if ($validator->fails()) {
+            return ApiFormatter::createApi(400, 'Bad Request', $validator->errors()->count(), $validator->errors());
+        }
+
+        $validated = $validator->validated();
+        $count = count($validated);
+        $sensor->update($validated);
+        return ApiFormatter::createApi(201, 'Data stored', $count, $validated);
+    }
 }

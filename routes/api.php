@@ -20,6 +20,7 @@ Route::get('/{sensor}/setpoint', [APIController::class, 'setpoint']);
 Route::get('/{sensor}/data', [APIController::class, 'data']);
 
 Route::post('{sensor}', [APIController::class, 'store']);
+Route::patch('{sensor}', [APIController::class, 'update']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
