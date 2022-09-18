@@ -85,7 +85,9 @@ class APIController extends Controller
         if (!$data) {
             return ApiFormatter::createApi(400, 'Failed fetching data');
         }
-        return ApiFormatter::createApi(200, 'Success fetching data', 1, $data);
+        $count = $data->count();
+
+        return ApiFormatter::createApi(200, 'Success fetching data', $count, $data);
     }
 
     public function data(Sensor $sensor, Request $request)
