@@ -87,8 +87,7 @@
 
 @section('javascript')
 <script>
-//   const url = 'http://128.199.87.189';
-  const url = 'http://192.168.55.102/unilever-project/public';
+  const url = '{{ $api_url }}';
   const sensorName = '{{ $sensor->plant_name }}';
   let params = (new URL(document.location)).searchParams;
   let filter = params.get("filter");
@@ -105,7 +104,7 @@
   var generateData = function () {
     $.ajax({
       type: "POST",
-      url: url + `/api/${sensorName}`,
+      url: url + `${sensorName}`,
       data: {
         temperature1: getRndInteger(20, 30),
         temperature2: getRndInteger(20, 30),
@@ -171,7 +170,7 @@
 
       $.ajax({
         type: "GET",
-        url: url + `/api/${sensorName}/${sensorQuery}`,
+        url: url + `${sensorName}/${sensorQuery}`,
         dataType: 'JSON',
         success: function (resp) {
           resp.data.sensor_panel.forEach(data => {

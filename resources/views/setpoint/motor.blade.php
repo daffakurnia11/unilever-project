@@ -23,7 +23,7 @@
   <h6 class="mb-0 text-uppercase">Motor Set Point</h6>
   <hr>
   <div class="card col-xxl-8">
-    <form action="http://192.168.55.102/unilever-project/public/api/{{ $sensor->plant_name }}" method="POST" id="setPointForm">
+    <form action="{{ $api_url . $sensor->plant_name }}" method="POST" id="setPointForm">
       @method('PATCH')
       @csrf
       <div class="card-body">

@@ -155,7 +155,7 @@
 
 @section('javascript')
   <script>
-    const url = "http://192.168.55.102/unilever-project/public/api/all/latest";
+    const url = "{{ $api_url }}all/latest";
 
     function getTimestamp(timestamp) {
       let date = moment(timestamp).format("MMM, DD YYYY - HH:mm:ss");
