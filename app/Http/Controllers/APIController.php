@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ApiFormatter;
 use App\Models\Sensor;
+use App\Models\SensorMotor;
 use App\Models\SensorPanel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -65,5 +66,24 @@ class APIController extends Controller
 
         $count = SensorPanel::create($validated)->count();
         return ApiFormatter::createApi(201, 'Data stored', $count, $validated);
+    }
+
+    public function data(Sensor $sensor)
+    {
+        if ($sensor->plant_type == 'Panel') {
+            $data_sensor = SensorPanel::where('sensor_id', $sensor->id)->get();
+            $sensor['sensor_panel'] = $data_sensor;
+        } elseif ($sensor->plant_type == 'Motor') {
+            $data_sensor = SensorMotor::where('sensor_id', $sensor->id)->get();
+            $sensor['sensor_motor'] = $data_sensor;
+        }
+
+        $data = $sensor;
+        $count = $data_sensor->count();
+
+        if (!$data) {
+            return ApiFormatter::createApi(400, 'Failed fetching data');
+        }
+        return ApiFormatter::createApi(200, 'Success fetching data', $count, $data);
     }
 }

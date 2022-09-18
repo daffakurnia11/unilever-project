@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/{sensor}', [APIController::class, 'show']);
 Route::get('/{sensor}/setpoint', [APIController::class, 'setpoint']);
+Route::get('/{sensor}/data', [APIController::class, 'data']);
 
 Route::post('{sensor}', [APIController::class, 'store']);
 
