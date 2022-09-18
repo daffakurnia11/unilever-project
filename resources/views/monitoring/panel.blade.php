@@ -41,6 +41,29 @@
 <script>
 //   const url = 'http://128.199.87.189';
   const url = 'http://192.168.55.102/unilever-project/public/api';
+  const sensorName = '{{ $sensor->plant_name }}';
+
+  // Generating random data
+  function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
+  var generateData = function () {
+    $.ajax({
+      type: "POST",
+      url: url + `/${sensorName}`,
+      data: {
+        temperature1: getRndInteger(20, 30),
+        temperature2: getRndInteger(20, 30),
+        temperature3: getRndInteger(20, 30),
+        pressure1: getRndInteger(100, 200),
+        pressure2: getRndInteger(100, 200),
+        pressure3: getRndInteger(100, 200),
+      },
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }
 
   var chartOption = {
     chart: {
@@ -176,6 +199,7 @@
 
     updateChart();
     setInterval(() => {
+      generateData();
       updateChart();
     }, 5000);
   </script>
