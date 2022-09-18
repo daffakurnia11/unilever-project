@@ -10,7 +10,7 @@ class SensorSetPoint extends Model
     use HasFactory;
 
     protected $fillable = [
-        'sensor_id', 'set_point1', 'set_point2', 'set_point3'
+        'sensor_id', 'warning1', 'warning2', 'warning3', 'danger1', 'danger2', 'danger3'
     ];
 
     public function sensor()

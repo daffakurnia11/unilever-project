@@ -6,6 +6,7 @@ use App\Helpers\ApiFormatter;
 use App\Models\Sensor;
 use App\Models\SensorMotor;
 use App\Models\SensorPanel;
+use App\Models\SensorSetPoint;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -126,6 +127,7 @@ class APIController extends Controller
 
     public function update(Sensor $sensor, Request $request)
     {
+        $setPoint = SensorSetPoint::firstWhere('sensor_id', $sensor->id);
         if ($sensor->plant_type == 'Panel') {
             $validator = Validator::make($request->all(), [
                 'warning1'  => 'required',
@@ -149,8 +151,10 @@ class APIController extends Controller
         }
 
         $validated = $validator->validated();
-        $count = count($validated);
-        $sensor->update($validated);
-        return ApiFormatter::createApi(201, 'Data stored', $count, $validated);
+
+        $setPoint->update($validated);
+        $count = $setPoint->count();
+
+        return ApiFormatter::createApi(201, 'Data stored', $count, $setPoint);
     }
 }
