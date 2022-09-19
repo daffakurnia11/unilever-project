@@ -246,7 +246,7 @@
 
     updateChart();
     setInterval(() => {
-      generateData();
+      // generateData();
       updateChart();
     }, 5000);
   </script>

@@ -335,7 +335,7 @@
     updateChart();
     setInterval(() => {
       updateChart();
-      generateData();
+      // generateData();
     }, 5000);
   </script>
   @endsection
