@@ -209,6 +209,11 @@
       return date;
     }
 
+    function roundedNumber(num) {
+      let rounded = (Math.round(num * 100) / 100).toFixed(2);
+      return rounded
+    }
+
     var updateDashboard = () => {
       $.ajax({
         type: 'GET',
@@ -217,9 +222,9 @@
         success: function(resp) {
           resp.data.forEach(data => {
             if (data.plant_type == 'Panel') {
-              const temperature1 = data.sensor_panel[0].temperature1;
-              const temperature2 = data.sensor_panel[0].temperature2;
-              const temperature3 = data.sensor_panel[0].temperature3;
+              const temperature1 = roundedNumber(data.sensor_panel[0].temperature1);
+              const temperature2 = roundedNumber(data.sensor_panel[0].temperature2);
+              const temperature3 = roundedNumber(data.sensor_panel[0].temperature3);
               let status1 = '';
               let status2 = '';
               let status3 = '';
@@ -257,8 +262,8 @@
               $(`.${data.plant_name}-timestamp`).html(getTimestamp(data.sensor_panel[0].created_at))
             }
             else if (data.plant_type == 'Motor') {
-              const current = data.sensor_motor[0].ampere;
-              const temperature = data.sensor_motor[0].temperature;
+              const current = roundedNumber(data.sensor_motor[0].ampere);
+              const temperature = roundedNumber(data.sensor_motor[0].temperature);
               let status1 = '';
               let status2 = '';
 
@@ -282,9 +287,9 @@
               $(`.${data.plant_name}-temperature`).html(temperature)
               $(`.${data.plant_name}-status1`).html(status1)
               $(`.${data.plant_name}-status2`).html(status2)
-              $(`.${data.plant_name}-xAxis`).html(data.sensor_motor[0].x_axis)
-              $(`.${data.plant_name}-yAxis`).html(data.sensor_motor[0].y_axis)
-              $(`.${data.plant_name}-zAxis`).html(data.sensor_motor[0].z_axis)
+              $(`.${data.plant_name}-xAxis`).html(roundedNumber(data.sensor_motor[0].x_axis))
+              $(`.${data.plant_name}-yAxis`).html(roundedNumber(data.sensor_motor[0].y_axis))
+              $(`.${data.plant_name}-zAxis`).html(roundedNumber(data.sensor_motor[0].z_axis))
               $(`.${data.plant_name}-timestamp`).html(getTimestamp(data.sensor_motor[0].created_at))
             }
           });
