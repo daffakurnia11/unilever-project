@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth', [DashboardController::class, 'auth']);
-Route::post('/auth', [DashboardController::class, 'authentication']);
-Route::post('/logout', [DashboardController::class, 'logout']);
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/auth', [DashboardController::class, 'auth'])->middleware('guest');
+Route::post('/auth', [DashboardController::class, 'authentication'])->middleware('guest');
 
-Route::get('/{sensor}/monitoring', [DashboardController::class, 'monitoring']);
-Route::get('/{sensor}/setpoint', [DashboardController::class, 'setpoint']);
+Route::post('/logout', [DashboardController::class, 'logout'])->middleware('auth');
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
+
+Route::get('/{sensor}/monitoring', [DashboardController::class, 'monitoring'])->middleware('auth');
+Route::get('/{sensor}/setpoint', [DashboardController::class, 'setpoint'])->middleware('auth');
