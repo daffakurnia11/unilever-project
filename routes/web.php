@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth', [DashboardController::class, 'auth'])->middleware('guest');
+Route::get('/auth', [DashboardController::class, 'auth'])->middleware('guest')->name('login');
 Route::post('/auth', [DashboardController::class, 'authentication'])->middleware('guest');
 
 Route::post('/logout', [DashboardController::class, 'logout'])->middleware('auth');
