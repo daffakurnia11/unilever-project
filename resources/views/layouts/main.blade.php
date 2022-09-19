@@ -40,14 +40,15 @@
       
       @include('layouts.sidebar')
 
-      @include('layouts.switcher')
-
+      
       <!--start content-->
       <main class="page-content">
-            
+        
         @yield('content')
         
       </main>
+      
+      @include('layouts.switcher')
     @else 
 
       @yield('content')
