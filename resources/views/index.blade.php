@@ -155,7 +155,7 @@
               <i class="bi bi-arrow-bar-right"></i>
             </div>
             <p class="mb-0">X-axis</p>
-            <h3 class="mt-1 mb-0"><span class="{{ $menu->plant_name }}-xAxis"></span> deg</h3>
+            <h3 class="mt-1 mb-0"><span class="{{ $menu->plant_name }}-xAxis"></span> m/s<sup>2</sup></h3>
             <small id="xProgress" class="text-success">
               <i class="bi bi-caret-up-fill"></i>
               <span class="{{ $menu->plant_name }}-timestamp">-</span>
@@ -170,7 +170,7 @@
               <i class="bi bi-arrow-bar-up"></i>
             </div>
             <p class="mb-0">Y-axis</p>
-            <h3 class="mt-1 mb-0"><span class="{{ $menu->plant_name }}-yAxis"></span> deg</h3>
+            <h3 class="mt-1 mb-0"><span class="{{ $menu->plant_name }}-yAxis"></span> m/s<sup>2</sup></h3>
             <small id="yProgress" class="text-success">
               <i class="bi bi-caret-up-fill"></i>
               <span class="{{ $menu->plant_name }}-timestamp">-</span>
@@ -185,7 +185,7 @@
               <i class="bi bi-arrow-bar-down"></i>
             </div>
             <p class="mb-0">Z-axis</p>
-            <h3 class="mt-1 mb-0"><span class="{{ $menu->plant_name }}-zAxis"></span> deg</h3>
+            <h3 class="mt-1 mb-0"><span class="{{ $menu->plant_name }}-zAxis"></span> m/s<sup>2</sup></h3>
             <small id="PowerProgress" class="text-success">
               <i class="bi bi-caret-up-fill"></i>
               <span class="{{ $menu->plant_name }}-timestamp">-</span>
