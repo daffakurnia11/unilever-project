@@ -39,23 +39,23 @@ class APIController extends Controller
     {
         if ($sensor->plant_type == 'Panel') {
             $validator = Validator::make($request->all(), [
-                'temperature1'  => 'required',
-                'pressure1'     => 'required',
-                'temperature2'  => 'required',
-                'pressure2'     => 'required',
-                'temperature3'  => 'required',
-                'pressure3'     => 'required',
+                'temperature1'  => 'nullable',
+                'pressure1'     => 'nullable',
+                'temperature2'  => 'nullable',
+                'pressure2'     => 'nullable',
+                'temperature3'  => 'nullable',
+                'pressure3'     => 'nullable',
             ]);
         } elseif ($sensor->plant_type == 'Motor') {
             $validator = Validator::make($request->all(), [
-                'temperature'   => 'required',
-                'ambient'       => 'required',
-                'x_axis'        => 'required',
-                'y_axis'        => 'required',
-                'z_axis'        => 'required',
-                'volt'          => 'required',
-                'ampere'        => 'required',
-                'power'         => 'required',
+                'temperature'   => 'nullable',
+                'ambient'       => 'nullable',
+                'x_axis'        => 'nullable',
+                'y_axis'        => 'nullable',
+                'z_axis'        => 'nullable',
+                'volt'          => 'nullable',
+                'ampere'        => 'nullable',
+                'power'         => 'nullable',
             ]);
         }
 
